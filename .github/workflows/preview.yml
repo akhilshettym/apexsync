@@ -1,49 +1,49 @@
-# name: preview
+name: preview
 
-# on: 
-#   pull_request:
-#     branches: ["main"]
+on: 
+  pull_request:
+    branches: ["main"]
 
-# jobs:
-#   secret-scan:
-#     name: Secret Scanning (GitLeaks)
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v5
-#         with:
-#           fetch-depth: 0
+jobs:
+  secret-scan:
+    name: Secret Scanning (GitLeaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-#       - name: Run GitLeaks
-#         uses: gitleaks/gitleaks-action@v3
-#         env: 
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run GitLeaks
+        uses: gitleaks/gitleaks-action@v3
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#   frontend-checks:
-#     name: Frontend Checks
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: ./frontend
-#       steps:
-#         - name: Checkout Repository
-#           uses: actions/checkout@v5
+  frontend-checks:
+    name: Frontend Checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v5
 
-#         - name: Setup Node.js
-#           uses: action/setup-node@v5
-#           with:
-#             node-version: "24"
-#             cache: "npm"
-#             cache-dependency-path: "./frontend/package-lock.json"
+        - name: Setup Node.js
+          uses: action/setup-node@v5
+          with:
+            node-version: "24"
+            cache: "npm"
+            cache-dependency-path: "./frontend/package-lock.json"
 
-#         - name: Install Dependency
-#           run: npm ci
+        - name: Install Dependency
+          run: npm ci
 
-#         - name: Security Audit
-#           run: npm audit
+        - name: Security Audit
+          run: npm audit --omit=dev
 
-#         # - name: Check Formatting
-#         #   run: npm run format:check
+        - name: Check Formatting
+          run: npm run format:check
 
-#         # - name: Run Linter
-#         #   run: npm run lint
+        # - name: Run Linter
+        #   run: npm run lint

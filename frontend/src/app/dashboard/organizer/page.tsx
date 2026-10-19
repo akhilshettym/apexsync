@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  PlusCircle,
-  TrendingUp,
-  Calendar,
-  ArrowLeft,
-  DollarSign,
-  Ticket,
-} from "lucide-react";
+import { PlusCircle, TrendingUp, Calendar, ArrowLeft, DollarSign, Ticket } from "lucide-react";
 
 export default function OrganizerDashboard() {
   const router = useRouter();
@@ -26,9 +19,7 @@ export default function OrganizerDashboard() {
   const [venueId, setVenueId] = useState(101);
   const [basePrice, setBasePrice] = useState(50);
   const [startTime, setStartTime] = useState("");
-  const [sections, setSections] = useState([
-    { sectionName: "VIP", rowCount: 3, seatsPerRow: 10 },
-  ]);
+  const [sections, setSections] = useState([{ sectionName: "VIP", rowCount: 3, seatsPerRow: 10 }]);
 
   useEffect(() => {
     async function fetchStats() {
@@ -58,9 +49,7 @@ export default function OrganizerDashboard() {
           title,
           venueId: Number(venueId),
           basePrice: Number(basePrice),
-          startTime: startTime
-            ? new Date(startTime).toISOString()
-            : new Date().toISOString(),
+          startTime: startTime ? new Date(startTime).toISOString() : new Date().toISOString(),
           sections,
         }),
       });
@@ -80,14 +69,11 @@ export default function OrganizerDashboard() {
       <div className="max-w-5xl mx-auto">
         <button
           onClick={() => router.push("/")}
-          className="flex items-center text-slate-400 hover:text-white mb-6 transition"
-        >
+          className="flex items-center text-slate-400 hover:text-white mb-6 transition">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </button>
 
-        <h1 className="text-3xl font-extrabold mb-8">
-          Organizer Control Center
-        </h1>
+        <h1 className="text-3xl font-extrabold mb-8">Organizer Control Center</h1>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -110,17 +96,14 @@ export default function OrganizerDashboard() {
               <span className="text-sm font-medium">Total Revenue</span>
               <DollarSign className="w-5 h-5 text-amber-400" />
             </div>
-            <div className="text-3xl font-bold">
-              ${stats.totalRevenue.toFixed(2)}
-            </div>
+            <div className="text-3xl font-bold">${stats.totalRevenue.toFixed(2)}</div>
           </div>
         </div>
 
         {/* Create Event Form */}
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
           <h2 className="text-xl font-bold mb-6 flex items-center">
-            <PlusCircle className="w-5 h-5 mr-2 text-indigo-500" /> Create New
-            Flash Sale Event
+            <PlusCircle className="w-5 h-5 mr-2 text-indigo-500" /> Create New Flash Sale Event
           </h2>
 
           {success && (
@@ -132,9 +115,7 @@ export default function OrganizerDashboard() {
           <form onSubmit={handleCreateEvent} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1">
-                  Event Title
-                </label>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Event Title</label>
                 <input
                   type="text"
                   required
@@ -145,9 +126,7 @@ export default function OrganizerDashboard() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1">
-                  Venue ID
-                </label>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Venue ID</label>
                 <input
                   type="number"
                   required
@@ -159,9 +138,7 @@ export default function OrganizerDashboard() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1">
-                  Base Price ($)
-                </label>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Base Price ($)</label>
                 <input
                   type="number"
                   step="0.01"
@@ -172,9 +149,7 @@ export default function OrganizerDashboard() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1">
-                  Start Time
-                </label>
+                <label className="block text-sm font-medium text-slate-400 mb-1">Start Time</label>
                 <input
                   type="datetime-local"
                   required
@@ -188,11 +163,8 @@ export default function OrganizerDashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition mt-6"
-            >
-              {loading
-                ? "Generating Venue & Event..."
-                : "Launch Event & Generate Seats"}
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition mt-6">
+              {loading ? "Generating Venue & Event..." : "Launch Event & Generate Seats"}
             </button>
           </form>
         </div>

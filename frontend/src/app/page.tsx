@@ -2,13 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Calendar,
-  MapPin,
-  Ticket,
-  ArrowRight,
-  ShieldAlert,
-} from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight, ShieldAlert } from "lucide-react";
 
 interface Event {
   id: number;
@@ -51,14 +45,10 @@ export default function LandingPage() {
           <div className="flex items-center space-x-4">
             <Link
               href="/dashboard/organizer"
-              className="text-sm font-medium text-slate-400 hover:text-white transition"
-            >
+              className="text-sm font-medium text-slate-400 hover:text-white transition">
               Organizer Portal
             </Link>
-            <Link
-              href="/admin"
-              className="text-sm font-medium text-slate-400 hover:text-white transition"
-            >
+            <Link href="/admin" className="text-sm font-medium text-slate-400 hover:text-white transition">
               Admin
             </Link>
           </div>
@@ -70,28 +60,20 @@ export default function LandingPage() {
           High-Concurrency Event Ticketing
         </h1>
         <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
-          Engineered for flash sales with real-time distributed seat locking,
-          dynamic pricing, and zero booking conflicts.
+          Engineered for flash sales with real-time distributed seat locking, dynamic pricing, and zero booking
+          conflicts.
         </p>
       </section>
 
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        <h2 className="text-2xl font-bold mb-8 border-b border-slate-800 pb-4">
-          Upcoming Flash Sales
-        </h2>
+        <h2 className="text-2xl font-bold mb-8 border-b border-slate-800 pb-4">Upcoming Flash Sales</h2>
 
-        {loading && (
-          <div className="text-center py-12 text-slate-500">
-            Loading active events...
-          </div>
-        )}
+        {loading && <div className="text-center py-12 text-slate-500">Loading active events...</div>}
 
         {error && (
           <div className="bg-red-950/50 border border-red-800 p-4 rounded-lg flex items-center space-x-3 max-w-xl mx-auto text-red-300">
             <ShieldAlert className="w-5 h-5 shrink-0" />
-            <span>
-              {error} (Ensure your Spring Boot backend is running on port 8080).
-            </span>
+            <span>{error} (Ensure your Spring Boot backend is running on port 8080).</span>
           </div>
         )}
 
@@ -105,16 +87,13 @@ export default function LandingPage() {
           {events.map((event) => (
             <div
               key={event.id}
-              className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-indigo-500/50 transition"
-            >
+              className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-indigo-500/50 transition">
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-xs font-semibold rounded-full border border-indigo-500/20">
                     {event.status}
                   </span>
-                  <span className="text-xl font-bold text-emerald-400">
-                    ${event.basePrice.toFixed(2)}
-                  </span>
+                  <span className="text-xl font-bold text-emerald-400">${event.basePrice.toFixed(2)}</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                 <div className="flex items-center text-slate-400 text-sm mb-2">
@@ -129,8 +108,7 @@ export default function LandingPage() {
 
               <Link
                 href={`/event/${event.id}`}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-lg flex items-center justify-center space-x-2 transition"
-              >
+                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-lg flex items-center justify-center space-x-2 transition">
                 <span>View Seat Map</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
