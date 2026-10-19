@@ -45,9 +45,7 @@ function SeatMapContent() {
         if (!currentEvent) throw new Error("Event not found");
         setEvent(currentEvent);
 
-        const seatsRes = await fetch(
-          `http://localhost:8080/api/events/${eventId}/seats`,
-        );
+        const seatsRes = await fetch(`http://localhost:8080/api/events/${eventId}/seats`);
         const seatsData: Seat[] = await seatsRes.json();
         setSeats(seatsData);
       } catch (err: any) {
@@ -98,11 +96,7 @@ function SeatMapContent() {
       </div>
     );
   if (error && !event)
-    return (
-      <div className="min-h-screen bg-slate-950 text-red-400 flex items-center justify-center">
-        {error}
-      </div>
-    );
+    return <div className="min-h-screen bg-slate-950 text-red-400 flex items-center justify-center">{error}</div>;
 
   const sections = seats.reduce(
     (acc, seat) => {
@@ -118,23 +112,18 @@ function SeatMapContent() {
       <div className="max-w-6xl mx-auto">
         <button
           onClick={() => router.push("/")}
-          className="flex items-center text-slate-400 hover:text-white mb-6 transition"
-        >
+          className="flex items-center text-slate-400 hover:text-white mb-6 transition">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Events
         </button>
 
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold mb-1">{event?.title}</h1>
-            <p className="text-slate-400 text-sm">
-              Select an available seat to lock it for 10 minutes.
-            </p>
+            <p className="text-slate-400 text-sm">Select an available seat to lock it for 10 minutes.</p>
           </div>
           <div className="text-right">
             <span className="text-sm text-slate-400 block">Base Price</span>
-            <span className="text-2xl font-bold text-emerald-400">
-              ${event?.basePrice.toFixed(2)}
-            </span>
+            <span className="text-2xl font-bold text-emerald-400">${event?.basePrice.toFixed(2)}</span>
           </div>
         </div>
 
@@ -150,9 +139,7 @@ function SeatMapContent() {
             <CheckCircle2 className="w-5 h-5 shrink-0" />
             <div>
               <p className="font-semibold">{successMessage}</p>
-              <p className="text-xs text-emerald-400 mt-1">
-                Proceed to payment before the 10-minute timer expires.
-              </p>
+              <p className="text-xs text-emerald-400 mt-1">Proceed to payment before the 10-minute timer expires.</p>
             </div>
           </div>
         )}
@@ -163,13 +150,8 @@ function SeatMapContent() {
 
         <div className="space-y-8">
           {Object.entries(sections).map(([sectionName, sectionSeats]) => (
-            <div
-              key={sectionName}
-              className="bg-slate-900/50 border border-slate-800 rounded-xl p-6"
-            >
-              <h3 className="text-lg font-semibold mb-4 text-indigo-400">
-                {sectionName}
-              </h3>
+            <div key={sectionName} className="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+              <h3 className="text-lg font-semibold mb-4 text-indigo-400">{sectionName}</h3>
               <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
                 {sectionSeats.map((seat) => {
                   const isSelected = selectedSeat?.id === seat.id;
@@ -182,8 +164,7 @@ function SeatMapContent() {
                         isSelected
                           ? "bg-amber-500 border-amber-400 text-slate-950 font-bold"
                           : "bg-slate-800 border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 text-slate-200"
-                      }`}
-                    >
+                      }`}>
                       <span>
                         {seat.rowNum}
                         {seat.seatNum}
@@ -207,8 +188,7 @@ export default function SeatMapPage() {
         <div className="min-h-screen bg-slate-950 text-slate-400 flex items-center justify-center">
           Loading interactive seat map...
         </div>
-      }
-    >
+      }>
       <SeatMapContent />
     </Suspense>
   );

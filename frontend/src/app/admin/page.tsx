@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ShieldAlert,
-  Activity,
-  Database,
-  Server,
-  ArrowLeft,
-} from "lucide-react";
+import { ShieldAlert, Activity, Database, Server, ArrowLeft } from "lucide-react";
 
 export default function AdminControlCenter() {
   const router = useRouter();
@@ -18,9 +12,7 @@ export default function AdminControlCenter() {
   useEffect(() => {
     async function fetchHealth() {
       try {
-        const res = await fetch(
-          "http://localhost:8080/api/admin/system/health",
-        );
+        const res = await fetch("http://localhost:8080/api/admin/system/health");
         if (res.ok) {
           const data = await res.json();
           setHealth(data);
@@ -39,19 +31,14 @@ export default function AdminControlCenter() {
       <div className="max-w-5xl mx-auto">
         <button
           onClick={() => router.push("/")}
-          className="flex items-center text-slate-400 hover:text-white mb-6 transition"
-        >
+          className="flex items-center text-slate-400 hover:text-white mb-6 transition">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </button>
 
         <h1 className="text-3xl font-extrabold mb-2">Admin Control Center</h1>
-        <p className="text-slate-400 mb-8">
-          System observability, Redis lock counts, and infrastructure metrics.
-        </p>
+        <p className="text-slate-400 mb-8">System observability, Redis lock counts, and infrastructure metrics.</p>
 
-        {loading && (
-          <div className="text-slate-500">Querying system metrics...</div>
-        )}
+        {loading && <div className="text-slate-500">Querying system metrics...</div>}
 
         {health && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -60,9 +47,7 @@ export default function AdminControlCenter() {
                 <span className="text-sm font-medium">System Status</span>
                 <Activity className="w-5 h-5 text-emerald-400" />
               </div>
-              <div className="text-2xl font-bold text-emerald-400">
-                {health.status}
-              </div>
+              <div className="text-2xl font-bold text-emerald-400">{health.status}</div>
             </div>
 
             <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
@@ -70,9 +55,7 @@ export default function AdminControlCenter() {
                 <span className="text-sm font-medium">Active Redis Locks</span>
                 <Database className="w-5 h-5 text-indigo-400" />
               </div>
-              <div className="text-2xl font-bold">
-                {health.activeRedisLocks}
-              </div>
+              <div className="text-2xl font-bold">{health.activeRedisLocks}</div>
             </div>
 
             <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
@@ -80,9 +63,7 @@ export default function AdminControlCenter() {
                 <span className="text-sm font-medium">JVM Memory Used</span>
                 <Server className="w-5 h-5 text-amber-400" />
               </div>
-              <div className="text-2xl font-bold">
-                {health.jvmMemoryUsedMB} MB
-              </div>
+              <div className="text-2xl font-bold">{health.jvmMemoryUsedMB} MB</div>
             </div>
           </div>
         )}
