@@ -1,6 +1,6 @@
 name: preview
 
-on: 
+on:
   pull_request:
     branches: ["main"]
 
@@ -16,7 +16,7 @@ jobs:
 
       - name: Run GitLeaks
         uses: gitleaks/gitleaks-action@v3
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   frontend-checks:
@@ -25,25 +25,25 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
 
-        - name: Setup Node.js
-          uses: action/setup-node@v5
-          with:
-            node-version: "24"
-            cache: "npm"
-            cache-dependency-path: "./frontend/package-lock.json"
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: "./frontend/package-lock.json"
 
-        - name: Install Dependency
-          run: npm ci
+      - name: Install Dependency
+        run: npm ci
 
-        - name: Security Audit
-          run: npm audit --omit=dev
+      - name: Security Audit
+        run: npm audit --omit=dev
 
-        - name: Check Formatting
-          run: npm run format:check
+      - name: Check Formatting
+        run: npm run format:check
 
-        # - name: Run Linter
-        #   run: npm run lint
+    # - name: Run Linter
+    #   run: npm run lint
